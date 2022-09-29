@@ -1,0 +1,15 @@
+apiVersion: v2
+name: localstack
+description: Localstack
+type: application
+version: 0.0.1
+appVersion: 0.0.1
+dependencies:
+  - name: localstack
+    version: 0.4.x
+    repository: https://localstack.github.io/helm-charts
+    condition: localstack.enabled
+    tags:
+      - localstack
+      - kinesis
+      - dynamodb
