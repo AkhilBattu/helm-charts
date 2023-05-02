@@ -1,0 +1,41 @@
+localstack:
+  enabled: true
+  startServices: kinesis,dynamodb,cloudwatch,s3
+  enableStartupScripts: true
+  startupScriptContent: |
+    awslocal s3 mb s3://avail-customer-logos-local
+
+extraEnvVars:
+  - name: DEFAULT_REGION
+    value: us-west-1
+
+livenessProbe:
+  initialDelaySeconds: 0
+  periodSeconds: 30
+  timeoutSeconds: 1
+  successThreshold: 1
+  failureThreshold: 3
+readinessProbe:
+  initialDelaySeconds: 0
+  periodSeconds: 10
+  timeoutSeconds: 1
+  successThreshold: 1
+  failureThreshold: 3
+    
+image:
+  repository:
+  pullPolicy: Always
+  tag: ""
+
+imagePullSecrets:
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 80
+  
+resources:
+  requests:
+    cpu: 400m
+    memory: 2048Mi

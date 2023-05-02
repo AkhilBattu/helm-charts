@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: avail-postgresql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: avail-postgresql
+  template:
+    metadata:
+      labels:
+        app: avail-postgresql
+    spec:
+      imagePullSecrets:
+        - name: secret-registry
+      containers:
+        - name: avail-postgresql
+          image: 004523147146.dkr.ecr.us-west-2.amazonaws.com/dev/avail-be-automation-postgres:qa-latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 5432
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 400m
+              memory: 1024Mi
