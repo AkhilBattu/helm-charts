@@ -16,7 +16,7 @@ spec:
         - name: secret-registry
       containers:
         - name: avail-postgresql
-          image: 004523147146.dkr.ecr.us-west-2.amazonaws.com/dev/avail-be-automation-postgres:qa-latest
+          image: 004523147146.dkr.ecr.us-west-2.amazonaws.com/dev/avail-be-automation-postgres:dev-latest
           imagePullPolicy: Always
           ports:
             - name: http
