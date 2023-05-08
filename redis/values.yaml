@@ -1,0 +1,30 @@
+redisConfig:
+  database: 0
+  port: 6379
+
+redis:
+  enabled: true
+  architecture: standalone
+  auth:
+    enabled: false
+  master:
+    persistence:
+      enabled: false
+
+image:
+  repository:
+  pullPolicy: Always
+  tag: ""
+
+imagePullSecrets:
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources:
+  requests:
+    cpu: 400m
+    memory: 1024Mi

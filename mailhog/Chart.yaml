@@ -1,0 +1,14 @@
+apiVersion: v2
+description: An e-mail testing tool for developers
+name: mailhog
+appVersion: v1.0.1
+version: 5.2.3
+type: application
+dependencies:
+  - name: mailhog
+    version: 5.x.x
+    repository: https://codecentric.github.io/helm-charts
+    condition: mailhog.enabled
+    tags:
+      - mailhog
+      - smtp

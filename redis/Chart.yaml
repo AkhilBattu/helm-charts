@@ -1,0 +1,11 @@
+apiVersion: v2
+name: redis
+version: 17.10.2
+appVersion: 7.0.11
+dependencies:
+  - name: redis
+    version: 17.x.x
+    repository: https://charts.bitnami.com/bitnami
+    condition: redis.enabled
+    tags:
+      - redis
