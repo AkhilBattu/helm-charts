@@ -1,27 +1,45 @@
 localstack:
   enabled: true
-  startServices: kinesis,dynamodb,cloudwatch,s3
+  role:
+    create: false
+  serviceAccount:
+    create: false
+  livenessProbe:
+    initialDelaySeconds: 0
+    periodSeconds: 30
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 3
+  readinessProbe:
+    initialDelaySeconds: 0
+    periodSeconds: 10
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 3
+  service:
+    type: NodePort
+    annotations: { }
+    ipFamilies: [ ]
+    ipFamilyPolicy: ""
+    externalTrafficPolicy: ""
+    edgeService:
+      name: edge
+      targetPort: 4566
+      nodePort: 31566
+    externalServicePorts:
+      start: 4566
+      end: 4566
+  startServices: kinesis,dynamodb,s3
+  config:
+    INIT_SCRIPTS_PATH: /etc/localstack/init
   enableStartupScripts: true
   startupScriptContent: |
     awslocal s3 mb s3://avail-customer-logos-local
+  extraEnvVars:
+    - name: DEFAULT_REGION
+      value: us-west-1
 
-extraEnvVars:
-  - name: DEFAULT_REGION
-    value: us-west-1
 
-livenessProbe:
-  initialDelaySeconds: 0
-  periodSeconds: 30
-  timeoutSeconds: 1
-  successThreshold: 1
-  failureThreshold: 3
-readinessProbe:
-  initialDelaySeconds: 0
-  periodSeconds: 10
-  timeoutSeconds: 1
-  successThreshold: 1
-  failureThreshold: 3
-    
 image:
   repository:
   pullPolicy: Always
